@@ -112,17 +112,6 @@ export default async function TestLandingPage({ params }: Props) {
             >
               ← 다른 테스트 보기
             </Link>
-            {test.type === "quiz" && (
-              <>
-                <span className="text-white/20 text-xs">·</span>
-                <Link
-                  href={`/${test.id}/results`}
-                  className="text-xs text-white/40 hover:text-white/70 transition-colors"
-                >
-                  전체 유형 보기
-                </Link>
-              </>
-            )}
           </div>
         </div>
       </div>
