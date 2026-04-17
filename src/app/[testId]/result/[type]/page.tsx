@@ -57,22 +57,44 @@ export default async function ResultPage({ params }: Props) {
 
         <div className="mt-6 flex flex-col items-center gap-3">
           <Link
-            href={`/${testId}`}
-            className="text-sm text-gray-400 underline underline-offset-2 hover:text-gray-600 transition-colors"
+            href={`/${testId}/quiz`}
+            className="
+              inline-flex items-center gap-1.5
+              text-sm font-semibold text-gray-600
+              bg-white border border-gray-200
+              px-5 py-2.5 rounded-full
+              hover:bg-gray-50 hover:border-gray-300
+              active:scale-[0.98] transition-all duration-150
+              shadow-sm
+            "
           >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M10 7H4M4 7L7 4M4 7L7 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             테스트 다시 하기
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <Link
               href={`/${testId}/results`}
-              className="text-xs text-gray-300 hover:text-gray-500 transition-colors"
+              className="
+                text-xs font-medium text-gray-500
+                bg-white border border-gray-200
+                px-4 py-1.5 rounded-full
+                hover:bg-gray-50 hover:text-gray-700
+                transition-all duration-150
+              "
             >
               전체 유형 보기
             </Link>
-            <span className="text-gray-200 text-xs">·</span>
             <Link
               href="/"
-              className="text-xs text-gray-300 hover:text-gray-500 transition-colors"
+              className="
+                text-xs font-medium text-gray-500
+                bg-white border border-gray-200
+                px-4 py-1.5 rounded-full
+                hover:bg-gray-50 hover:text-gray-700
+                transition-all duration-150
+              "
             >
               다른 테스트 보기
             </Link>

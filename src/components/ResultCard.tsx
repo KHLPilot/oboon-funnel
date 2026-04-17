@@ -3,6 +3,7 @@
 import Image from "next/image";
 import type { ResultType } from "@/data/types";
 import ShareButtons from "@/components/ShareButtons";
+import AdUnit from "@/components/AdUnit";
 
 interface ResultCardProps {
   result: ResultType;
@@ -35,6 +36,34 @@ const FALLBACK = {
   accent: "text-white",
   badge: "bg-white text-slate-900",
 };
+
+function FormattedText({
+  text,
+  baseClass = "text-gray-800 text-sm leading-relaxed",
+}: {
+  text: string;
+  baseClass?: string;
+}) {
+  const paragraphs = text.split("\n\n");
+  return (
+    <div className="space-y-2 mt-1">
+      {paragraphs.map((para, i) => {
+        if (para.startsWith("→ ")) {
+          return (
+            <p key={i} className="text-sm font-extrabold text-gray-900 pt-1">
+              {para}
+            </p>
+          );
+        }
+        return (
+          <p key={i} className={baseClass}>
+            {para}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
 
 function CreditLine({ credits }: { credits: ResultType["photoCredits"] }) {
   if (!credits?.length) return null;
@@ -87,8 +116,8 @@ export default function ResultCard({ result }: ResultCardProps) {
             </span>
             {/* 텍스트 — 하단 */}
             <div className="absolute bottom-0 left-0 right-0 px-6 pb-6">
-              <p className="text-white/70 text-sm font-medium mb-0.5 drop-shadow">
-                {result.building}
+              <p className="text-white font-extrabold text-xs tracking-widest uppercase mb-1.5 drop-shadow">
+                📍 {result.building}
               </p>
               <h1 className="text-3xl font-black text-white mb-1.5 drop-shadow-lg">
                 {result.name}
@@ -125,9 +154,10 @@ export default function ResultCard({ result }: ResultCardProps) {
 
       {/* 성향 설명 */}
       <div className="bg-white rounded-2xl p-6 mb-4 shadow-sm border border-gray-100">
-        <p className="text-gray-700 text-base leading-relaxed">
-          {result.description}
-        </p>
+        <FormattedText
+          text={result.description}
+          baseClass="text-gray-700 text-base leading-relaxed"
+        />
       </div>
 
       {/* 강점 / 리스크 / 해결 방향 */}
@@ -136,59 +166,70 @@ export default function ResultCard({ result }: ResultCardProps) {
           <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider">
             강점
           </span>
-          <p className="text-gray-800 text-sm mt-1 leading-relaxed">
-            {result.strength}
-          </p>
+          <FormattedText text={result.strength} />
         </div>
         <div className="border-t border-gray-100" />
         <div>
           <span className="text-xs font-bold text-rose-500 uppercase tracking-wider">
             주의점
           </span>
-          <p className="text-gray-800 text-sm mt-1 leading-relaxed">
-            {result.risk}
-          </p>
+          <FormattedText text={result.risk} />
         </div>
         <div className="border-t border-gray-100" />
         <div>
           <span className="text-xs font-bold text-oboon-primary uppercase tracking-wider">
             찰떡궁합
           </span>
-          <p className="text-gray-800 text-sm mt-1 leading-relaxed">
-            {result.solution}
-          </p>
+          <FormattedText text={result.solution} />
         </div>
       </div>
 
       {/* 공유 */}
       <ShareButtons result={result} />
 
+      {/* 광고 */}
+      <AdUnit
+        slot={process.env.NEXT_PUBLIC_AD_SLOT_RESULT ?? ""}
+        className="mb-6 rounded-xl overflow-hidden"
+      />
+
       {/* CTA */}
-      <div className="bg-oboon-dark rounded-2xl p-6">
-        <a
-          href={OBOON_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="
-            block w-full text-center
-            bg-oboon-accent text-oboon-dark
-            font-bold text-base
-            py-4 px-6 rounded-xl
-            active:scale-[0.98]
-            hover:brightness-110
-            transition-all duration-150
-          "
-        >
-          {result.ctaText}
-        </a>
-        <p className="text-center text-xs text-gray-400 mt-3">
-          {result.ctaSubtext}
-        </p>
-        <p className="text-center text-xs text-gray-600 mt-2">
-          OBOON · 부동산 조건 검증 서비스
-        </p>
-        {/* 사진 출처 */}
-        <CreditLine credits={result.photoCredits} />
+      <div className="bg-oboon-dark rounded-2xl overflow-hidden">
+        {/* 상단 브랜드 바 */}
+        <div className="bg-oboon-accent px-6 py-2.5 flex items-center justify-center gap-2">
+          <span className="text-oboon-dark text-xs font-black tracking-widest uppercase">OBOON</span>
+          <span className="text-oboon-dark/50 text-xs">·</span>
+          <span className="text-oboon-dark text-xs font-medium">부동산 조건 검증 서비스</span>
+        </div>
+
+        <div className="px-6 pt-5 pb-6">
+          {/* 한줄 문구 */}
+          <p className="text-center text-white text-base font-semibold leading-snug mb-5">
+            {result.ctaSubtext}
+          </p>
+
+          {/* 버튼 */}
+          <a
+            href={OBOON_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              block w-full text-center
+              bg-oboon-accent text-oboon-dark
+              font-black text-base
+              py-4 px-6 rounded-xl
+              active:scale-[0.98]
+              hover:brightness-110
+              transition-all duration-150
+              shadow-lg shadow-yellow-400/20
+            "
+          >
+            {result.ctaText}
+          </a>
+
+          {/* 사진 출처 */}
+          <CreditLine credits={result.photoCredits} />
+        </div>
       </div>
     </div>
   );

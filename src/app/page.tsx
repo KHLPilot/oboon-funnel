@@ -1,5 +1,6 @@
 import { testRegistry } from "@/data/tests/index";
 import TestCard from "@/components/TestCard";
+import AdUnit from "@/components/AdUnit";
 
 export default function HubPage() {
   const liveTests = testRegistry.filter((t) => t.isLive);
@@ -33,6 +34,12 @@ export default function HubPage() {
             ))}
           </div>
         </section>
+
+        {/* 광고 */}
+        <AdUnit
+          slot={process.env.NEXT_PUBLIC_AD_SLOT_HOME ?? ""}
+          className="mb-6 rounded-xl overflow-hidden"
+        />
 
         {/* Coming soon */}
         {comingSoonTests.length > 0 && (

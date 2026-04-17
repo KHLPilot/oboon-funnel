@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { getTestData, testRegistry } from "@/data/tests/index";
+import AdUnit from "@/components/AdUnit";
 import type { Metadata } from "next";
 import type { ResultType } from "@/data/types";
 
@@ -123,7 +124,12 @@ export default async function AllResultsPage({ params }: Props) {
           ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <AdUnit
+          slot={process.env.NEXT_PUBLIC_AD_SLOT_RESULTS ?? ""}
+          className="mt-8 rounded-xl overflow-hidden"
+        />
+
+        <div className="mt-6 text-center">
           <Link
             href={`/${testId}/quiz`}
             className="

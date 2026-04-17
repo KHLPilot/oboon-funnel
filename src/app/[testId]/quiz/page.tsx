@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { getResultType } from "@/lib/scoring";
 import QuestionCard from "@/components/QuestionCard";
 import ProgressBar from "@/components/ProgressBar";
+import AdUnit from "@/components/AdUnit";
 import type { QuizQuestion } from "@/data/types";
 
 export default function QuizPage() {
@@ -97,7 +98,7 @@ export default function QuizPage() {
         </div>
       </header>
 
-      <div className="flex-1 flex items-start justify-center px-5 py-10">
+      <div className="flex-1 flex flex-col items-center justify-start px-5 py-10 gap-6">
         <div className="w-full max-w-md">
           {!isTransitioning && currentQuestion && (
             <QuestionCard
@@ -107,6 +108,12 @@ export default function QuizPage() {
               onSelect={handleSelect}
             />
           )}
+        </div>
+        <div className="w-full max-w-md">
+          <AdUnit
+            slot={process.env.NEXT_PUBLIC_AD_SLOT_QUIZ ?? ""}
+            className="rounded-xl overflow-hidden"
+          />
         </div>
       </div>
     </main>
