@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const IMAGES = [
   "/images/landmarks/upward-1200.jpg",
@@ -13,37 +14,94 @@ const IMAGES = [
   "/images/landmarks/planner-1200.jpg",
 ];
 
-// 끊김 없는 루프를 위해 2배로 복제
-const STRIP = [...IMAGES, ...IMAGES];
-
 export default function LandmarkSlideshow() {
+  const [current, setCurrent] = useState(0);
+  const [prev, setPrev] = useState<number | null>(null);
+  const [transitioning, setTransitioning] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const next = (current + 1) % IMAGES.length;
+      setPrev(current);
+      setCurrent(next);
+      setTransitioning(true);
+      setTimeout(() => {
+        setPrev(null);
+        setTransitioning(false);
+      }, 1200);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [current]);
+
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* 가로 스크롤 스트립 */}
+      {/* 이전 이미지 (페이드아웃) */}
+      {prev !== null && (
+        <div
+          className="absolute inset-0"
+          style={{
+            opacity: transitioning ? 0 : 1,
+            transition: "opacity 1.2s ease-in-out",
+            zIndex: 1,
+          }}
+        >
+          <Image
+            src={IMAGES[prev]}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+      )}
+
+      {/* 현재 이미지 (페이드인 + 줌) */}
       <div
-        className="absolute top-0 left-0 h-full flex"
-        style={{ animation: "scrollStrip 28s linear infinite" }}
+        key={current}
+        className="absolute inset-0"
+        style={{
+          opacity: 1,
+          zIndex: 2,
+          animation: "slowZoom 4s ease-out forwards",
+        }}
       >
-        {STRIP.map((src, i) => (
+        <Image
+          src={IMAGES[current]}
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority={current === 0}
+        />
+      </div>
+
+      {/* 하단 인디케이터 도트 */}
+      <div
+        className="absolute bottom-20 left-0 right-0 flex justify-center gap-1.5"
+        style={{ zIndex: 4 }}
+      >
+        {IMAGES.map((_, i) => (
           <div
             key={i}
-            className="relative h-full flex-shrink-0"
-            style={{ width: "56vw" }}
-          >
-            <Image
-              src={src}
-              alt=""
-              fill
-              className="object-cover"
-              sizes="56vw"
-              priority={i < 3}
-            />
-          </div>
+            className="rounded-full transition-all duration-500"
+            style={{
+              width: i === current ? 20 : 6,
+              height: 6,
+              backgroundColor: i === current ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.35)",
+            }}
+          />
         ))}
       </div>
 
-      {/* 어두운 오버레이 */}
-      <div className="absolute inset-0 bg-black/55" />
+      {/* 그라디언트 오버레이 — 상하 */}
+      <div
+        className="absolute inset-0"
+        style={{
+          zIndex: 3,
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.6) 100%)",
+        }}
+      />
     </div>
   );
 }

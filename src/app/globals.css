@@ -28,7 +28,7 @@ button {
   -webkit-appearance: none;
 }
 
-@keyframes scrollStrip {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+@keyframes slowZoom {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1.0); }
 }

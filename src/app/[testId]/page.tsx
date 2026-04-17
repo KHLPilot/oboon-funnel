@@ -63,61 +63,68 @@ export default async function TestLandingPage({ params }: Props) {
         <div className="absolute inset-0 bg-oboon-dark" />
       )}
 
-      {/* 콘텐츠 */}
-      <div className="relative flex-1 flex flex-col items-center justify-center px-6 pt-16 pb-8 text-center" style={{ zIndex: 3 }}>
-        <div className="inline-block bg-oboon-accent text-oboon-dark text-xs font-black px-4 py-1.5 rounded-full mb-6 tracking-wide">
-          {test.tag}
+      {/* 콘텐츠 — 상하로 나눠서 타이틀은 중앙, CTA는 하단 고정 */}
+      <div className="relative flex-1 flex flex-col" style={{ zIndex: 3 }}>
+        {/* 중앙 타이틀 영역 */}
+        <div className="flex-1 flex flex-col items-center justify-center px-6 text-center pb-8">
+          <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-5 tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-oboon-accent inline-block" />
+            {test.tag}
+          </div>
+
+          {!hasSlideshow && <div className="text-6xl mb-5">{test.emoji}</div>}
+
+          <h1 className="text-3xl font-black text-white leading-tight mb-3" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}>
+            {test.title}
+          </h1>
+
+          <p className="text-white/70 text-sm leading-relaxed max-w-xs" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>
+            {test.description}
+          </p>
         </div>
 
-        {!hasSlideshow && <div className="text-6xl mb-6">{test.emoji}</div>}
+        {/* 하단 CTA */}
+        <div className="px-6 pb-6 flex flex-col items-center gap-3">
+          <Link
+            href={`/${test.id}/quiz`}
+            className="
+              w-full max-w-xs block text-center
+              bg-oboon-accent text-oboon-dark
+              font-black text-lg
+              py-4 rounded-2xl
+              active:scale-[0.98]
+              hover:brightness-110
+              transition-all duration-150
+              shadow-2xl shadow-black/40
+            "
+          >
+            테스트 시작하기 →
+          </Link>
 
-        <h1 className="text-2xl font-black text-white leading-tight mb-3 drop-shadow-lg">
-          {test.title}
-        </h1>
+          <p className="text-white/50 text-xs">
+            약 2분 소요 · {test.questionCount}문항
+          </p>
 
-        <p className="text-gray-300 text-sm leading-relaxed mb-10 max-w-xs drop-shadow">
-          {test.description}
-        </p>
-
-        <Link
-          href={`/${test.id}/quiz`}
-          className="
-            w-full max-w-xs block text-center
-            bg-oboon-accent text-oboon-dark
-            font-black text-lg
-            py-4 rounded-2xl
-            active:scale-[0.98]
-            hover:brightness-110
-            transition-all duration-150
-            shadow-lg shadow-yellow-400/20
-          "
-        >
-          테스트 시작하기 →
-        </Link>
-
-        <p className="text-gray-400 text-xs mt-4">
-          약 2분 소요 · {test.questionCount}문항
-        </p>
-      </div>
-
-      <div className="relative px-6 pb-8 flex items-center justify-center gap-4" style={{ zIndex: 3 }}>
-        <Link
-          href="/"
-          className="text-xs text-gray-400 underline underline-offset-2 hover:text-gray-200 transition-colors"
-        >
-          ← 다른 테스트 보기
-        </Link>
-        {test.type === "quiz" && (
-          <>
-            <span className="text-gray-600 text-xs">·</span>
+          <div className="flex items-center gap-4 mt-1">
             <Link
-              href={`/${test.id}/results`}
-              className="text-xs text-gray-400 underline underline-offset-2 hover:text-gray-200 transition-colors"
+              href="/"
+              className="text-xs text-white/40 hover:text-white/70 transition-colors"
             >
-              전체 유형 보기
+              ← 다른 테스트 보기
             </Link>
-          </>
-        )}
+            {test.type === "quiz" && (
+              <>
+                <span className="text-white/20 text-xs">·</span>
+                <Link
+                  href={`/${test.id}/results`}
+                  className="text-xs text-white/40 hover:text-white/70 transition-colors"
+                >
+                  전체 유형 보기
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </main>
   );
