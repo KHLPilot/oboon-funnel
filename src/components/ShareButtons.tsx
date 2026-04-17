@@ -25,7 +25,10 @@ export default function ShareButtons({ result }: ShareButtonsProps) {
   const [currentUrl, setCurrentUrl] = useState("");
 
   useEffect(() => {
-    setCurrentUrl(window.location.href);
+    // 공유 URL에는 ?from=share 파라미터 추가 (받은 사람이 볼 때 다른 UI 표시)
+    const url = new URL(window.location.href);
+    url.searchParams.set("from", "share");
+    setCurrentUrl(url.toString());
 
     const appKey = process.env.NEXT_PUBLIC_KAKAO_APP_KEY;
     if (!appKey) return;

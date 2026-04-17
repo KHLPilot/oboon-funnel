@@ -28,7 +28,7 @@ button {
   -webkit-appearance: none;
 }
 
-@keyframes kenBurns {
-  from { transform: scale(1.08) translateX(0%); }
-  to   { transform: scale(1.13) translateX(4%); }
+@keyframes scrollStrip {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }

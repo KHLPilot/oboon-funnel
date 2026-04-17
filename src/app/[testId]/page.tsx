@@ -100,13 +100,24 @@ export default async function TestLandingPage({ params }: Props) {
         </p>
       </div>
 
-      <div className="relative px-6 pb-8 text-center" style={{ zIndex: 3 }}>
+      <div className="relative px-6 pb-8 flex items-center justify-center gap-4" style={{ zIndex: 3 }}>
         <Link
           href="/"
           className="text-xs text-gray-400 underline underline-offset-2 hover:text-gray-200 transition-colors"
         >
           ← 다른 테스트 보기
         </Link>
+        {test.type === "quiz" && (
+          <>
+            <span className="text-gray-600 text-xs">·</span>
+            <Link
+              href={`/${test.id}/results`}
+              className="text-xs text-gray-400 underline underline-offset-2 hover:text-gray-200 transition-colors"
+            >
+              전체 유형 보기
+            </Link>
+          </>
+        )}
       </div>
     </main>
   );
