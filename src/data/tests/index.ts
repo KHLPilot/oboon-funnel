@@ -1,6 +1,6 @@
 import type { QuizQuestion, ResultType } from "@/data/types";
 
-export type TestType = "quiz" | "worldcup" | "ramen";
+export type TestType = "quiz" | "ramen" | "balance" | "escape";
 
 export type TestMeta = {
   id: string;
@@ -10,7 +10,7 @@ export type TestMeta = {
   questionCount: number;
   isLive: boolean;
   type: TestType;
-  /** 허브 카드에서 보여줄 유형 태그 (예: "성향 테스트", "월드컵", "계산기") */
+  /** 허브 카드에서 보여줄 유형 태그 (예: "성향 테스트", "밸런스 게임", "계산기") */
   tag: string;
 };
 
@@ -36,14 +36,24 @@ export const testRegistry: TestMeta[] = [
     tag: "성향 테스트",
   },
   {
-    id: "worldcup",
-    title: "부동산 이상형 월드컵",
-    description: "16강 토너먼트로 결정하는 나의 이상적인 주거 조건",
-    emoji: "🏆",
+    id: "balance",
+    title: "부동산 밸런스 게임",
+    description: "5가지 극한 선택으로 알아보는 나의 부동산 가치관",
+    emoji: "⚖️",
+    questionCount: 5,
+    isLive: true,
+    type: "balance",
+    tag: "밸런스 게임",
+  },
+  {
+    id: "escape",
+    title: "벼락거지 탈출 시뮬레이션",
+    description: "2018년 3억으로 돌아간다면? 내 선택이 만드는 결말",
+    emoji: "🎲",
     questionCount: 0,
-    isLive: false,
-    type: "worldcup",
-    tag: "월드컵",
+    isLive: true,
+    type: "escape",
+    tag: "시뮬레이션",
   },
   {
     id: "ramen",

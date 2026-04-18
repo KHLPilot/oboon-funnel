@@ -1,8 +1,10 @@
 import { testRegistry } from "@/data/tests/index";
 import TestCard from "@/components/TestCard";
 import AdUnit from "@/components/AdUnit";
+import { getCounts } from "@/lib/counts";
 
-export default function HubPage() {
+export default async function HubPage() {
+  const counts = await getCounts();
   const liveTests = testRegistry.filter((t) => t.isLive);
   const comingSoonTests = testRegistry.filter((t) => !t.isLive);
 
@@ -28,9 +30,9 @@ export default function HubPage() {
           <h2 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 px-1">
             지금 바로 해볼 수 있어요
           </h2>
-          <div className="flex flex-col gap-3">
+          <div className="grid grid-cols-3 gap-2.5">
             {liveTests.map((test) => (
-              <TestCard key={test.id} test={test} />
+              <TestCard key={test.id} test={test} count={counts[test.id]} />
             ))}
           </div>
         </section>
@@ -47,7 +49,7 @@ export default function HubPage() {
             <h2 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-3 px-1">
               준비 중
             </h2>
-            <div className="flex flex-col gap-3">
+            <div className="grid grid-cols-3 gap-2.5">
               {comingSoonTests.map((test) => (
                 <TestCard key={test.id} test={test} />
               ))}

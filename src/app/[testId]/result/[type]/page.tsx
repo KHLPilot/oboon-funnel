@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { getTestData, getQuizTestIds, testRegistry } from "@/data/tests/index";
 import ResultCard from "@/components/ResultCard";
 import SharedResultOverlay from "@/components/SharedResultOverlay";
+import CountTracker from "@/components/CountTracker";
 import type { Metadata } from "next";
 
 interface Props {
@@ -53,6 +54,7 @@ export default async function ResultPage({ params }: Props) {
           <SharedResultOverlay result={result} testId={testId} />
         </Suspense>
 
+        <CountTracker testId={testId} />
         <ResultCard result={result} />
 
         <div className="mt-6 flex flex-col items-center gap-3">
