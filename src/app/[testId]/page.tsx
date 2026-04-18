@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { testRegistry } from "@/data/tests/index";
 import LandmarkSlideshow from "@/components/LandmarkSlideshow";
@@ -9,7 +9,10 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return testRegistry.map((t) => ({ testId: t.id }));
+  // quiz 타입만 정적 생성 — balance/escape/ramen은 전용 페이지가 있으므로 제외
+  return testRegistry
+    .filter((t) => t.type === "quiz")
+    .map((t) => ({ testId: t.id }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -27,6 +30,9 @@ export default async function TestLandingPage({ params }: Props) {
   const test = testRegistry.find((t) => t.id === testId);
 
   if (!test) notFound();
+
+  // quiz가 아닌 전용 페이지를 가진 테스트는 해당 페이지로 리다이렉트
+  if (test.type !== "quiz") redirect(`/${test.id}`);
 
   // 준비 중인 테스트는 coming soon 페이지 표시
   if (!test.isLive) {
