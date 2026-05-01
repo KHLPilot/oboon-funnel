@@ -49,7 +49,7 @@ export default async function TestLandingPage({ params }: Props) {
           <span className="text-gray-600">곧 공개됩니다.</span>
         </p>
         <Link
-          href="/"
+          href="/tests"
           className="text-sm text-gray-400 underline underline-offset-2 hover:text-gray-300 transition-colors"
         >
           ← 다른 테스트 보기
@@ -113,7 +113,7 @@ export default async function TestLandingPage({ params }: Props) {
 
           <div className="flex items-center gap-4 mt-1">
             <Link
-              href="/"
+              href="/tests"
               className="text-xs text-white/40 hover:text-white/70 transition-colors"
             >
               ← 다른 테스트 보기

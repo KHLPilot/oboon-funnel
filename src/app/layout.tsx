@@ -3,12 +3,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://oboon.co.kr"),
-  title: "OBOON 부동산 성향 테스트",
+  title: "맞춤매물 추천 서비스 | 내 조건에 맞는 매물, 대신 찾아드립니다",
   description:
-    "나의 주거 성향을 알면 선택이 쉬워진다. 랜드마크 유형 테스트, 집 유형 테스트, 라면 계산기까지.",
+    "자산·소득·희망지역·목적을 바탕으로 맞춤 매물을 찾아드립니다. 발품 대신 분석 리포트, 현장 동행까지 제공하는 부동산 의사결정 보조 서비스.",
   openGraph: {
-    title: "OBOON 부동산 성향 테스트",
-    description: "나의 주거 성향을 알면 선택이 쉬워진다.",
+    title: "맞춤매물 추천 서비스 | 내 조건에 맞는 매물, 대신 찾아드립니다",
+    description: "자산·소득·희망지역·목적을 바탕으로 맞춤 매물을 찾아드립니다.",
     type: "website",
   },
 };

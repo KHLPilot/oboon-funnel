@@ -38,7 +38,7 @@ export default function AboutPage() {
 
         {/* 홈으로 */}
         <Link
-          href="/"
+          href="/tests"
           className="
             block w-full text-center
             bg-oboon-accent text-oboon-dark

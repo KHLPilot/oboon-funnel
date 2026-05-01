@@ -319,7 +319,7 @@ export default function RamenPage() {
             </div>
 
             <div className="mt-4 flex justify-center">
-              <Link href="/" className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
+              <Link href="/tests" className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
                 다른 테스트 보기
               </Link>
             </div>

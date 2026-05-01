@@ -55,7 +55,7 @@ export default function PrivacyPage() {
 
         {/* 홈으로 */}
         <Link
-          href="/"
+          href="/tests"
           className="
             block w-full text-center
             bg-gray-900 text-white

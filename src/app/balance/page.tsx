@@ -228,7 +228,7 @@ export default function BalancePage() {
             >
               다시 하기
             </button>
-            <Link href="/" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
+            <Link href="/tests" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
               다른 테스트 보기
             </Link>
           </div>

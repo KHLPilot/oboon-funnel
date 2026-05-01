@@ -243,7 +243,7 @@ export default function EscapePage() {
           >
             시뮬레이션 시작하기 →
           </button>
-          <Link href="/" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
+          <Link href="/tests" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
             다른 테스트 보기
           </Link>
         </div>
@@ -338,7 +338,7 @@ export default function EscapePage() {
             >
               다시 시도하기
             </button>
-            <Link href="/" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
+            <Link href="/tests" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
               다른 테스트 보기
             </Link>
           </div>

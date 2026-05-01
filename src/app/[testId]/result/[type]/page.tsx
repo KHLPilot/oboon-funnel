@@ -89,7 +89,7 @@ export default async function ResultPage({ params }: Props) {
               전체 유형 보기
             </Link>
             <Link
-              href="/"
+              href="/tests"
               className="
                 text-xs font-medium text-gray-500
                 bg-white border border-gray-200
