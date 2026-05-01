@@ -7,10 +7,11 @@ import Link from "next/link";
 // 서비스 설정 상수 — 이 부분만 수정하면 됩니다
 // ============================================================
 const SERVICE_NAME = "맞춤매물 추천 서비스";
-const PRICE_TEXT = "오픈 준비 중";
-const PRICE_DETAIL = "상담 후 개별 안내";
-const CONTACT_PHONE = "010-0000-0000";
-const CONTACT_EMAIL = "contact@example.com";
+const PRICE_TEXT = "5만원";
+const PRICE_DETAIL = "리뷰 작성 시 무료 진행";
+const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSefi0ZDswMiI5ltU37Gq1prcUWRTivMWD48WgKesbXyH5jWXQ/viewform";
+const KAKAO_URL = "https://open.kakao.com/o/stRnXTsi";
+const KAKAO_QR_URL = "/images/kakao-qr.png";
 // ============================================================
 
 // ── 인라인 SVG 아이콘 ────────────────────────────────────────
@@ -118,10 +119,12 @@ export default function Home() {
               성향 테스트
             </Link>
             <a
-              href="#contact"
+              href={FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-blue-700 text-white px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold hover:bg-blue-800 transition-colors"
             >
-              무료 상담 신청
+              상담 신청
             </a>
           </div>
         </div>
@@ -146,24 +149,36 @@ export default function Home() {
                 <br />선택지만 남기세요
               </h1>
               <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-md">
-                자산·소득·희망지역·목적을 바탕으로 맞춤 매물을 찾아드립니다.
-                직접 발품 대신 분석 리포트로, 혼자 가기 부담스러운 현장엔 동행까지.
+                발품 뛸 시간이 없는 직장인, 부동산 정보가 어렵게 느껴지는 분,
+                혼자 현장에 가기 부담스러운 분 —<br />
+                맞춤 매물 선별부터 분석 리포트, 현장 동행까지 대신 해드립니다.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
-                  href="#contact"
+                  href={FORM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-400 text-white px-7 py-4 rounded-full font-bold text-base transition-colors shadow-lg shadow-blue-900/40"
                 >
-                  무료 상담 신청하기
+                  신청서 작성하기
                   <IconArrowRight className="w-4 h-4" />
                 </a>
                 <a
-                  href="#features"
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-7 py-4 rounded-full font-semibold text-base transition-colors"
+                  href={KAKAO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-slate-900 px-7 py-4 rounded-full font-bold text-base transition-colors shadow-lg"
                 >
-                  서비스 알아보기
+                  💬 카카오 채팅상담
                 </a>
               </div>
+              <a
+                href="#features"
+                className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-300 transition-colors"
+              >
+                서비스 자세히 알아보기
+                <IconArrowRight className="w-3.5 h-3.5" />
+              </a>
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-1 text-sm text-slate-400">
                 {["맞춤 매물 선별", "분석 리포트 제공", "현장 동행 가능"].map((t) => (
                   <span key={t} className="flex items-center gap-1.5">
@@ -210,10 +225,10 @@ export default function Home() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { emoji: "🔍", bg: "bg-orange-50", border: "border-orange-100", text: '"매물은 많은데 어떤 게 내 조건에 맞는지 모르겠어요"' },
-              { emoji: "⏰", bg: "bg-red-50", border: "border-red-100", text: '"퇴근하고 나면 집 찾을 시간이 너무 부족해요"' },
-              { emoji: "😰", bg: "bg-purple-50", border: "border-purple-100", text: '"분양 상담을 받아도 좋은 말만 듣는 것 같아 불안해요"' },
-              { emoji: "💰", bg: "bg-amber-50", border: "border-amber-100", text: '"내 자금으로 실제로 가능한 매물인지 판단이 어려워요"' },
+              { emoji: "⏰", bg: "bg-red-50", border: "border-red-100", text: '"퇴근하고 나면 집 찾을 시간이 너무 부족해요. 주말에도 발품 뛰기가 너무 힘들어요"' },
+              { emoji: "🤯", bg: "bg-orange-50", border: "border-orange-100", text: '"호가·실거래가·분양가… 숫자가 너무 많아서 어떤 기준으로 비교해야 할지 모르겠어요"' },
+              { emoji: "😰", bg: "bg-purple-50", border: "border-purple-100", text: '"분양 상담을 받아도 좋은 말만 하는 것 같아서 불안하고, 혼자 가기도 부담돼요"' },
+              { emoji: "💰", bg: "bg-amber-50", border: "border-amber-100", text: '"내 자금으로 실제로 살 수 있는 매물이 뭔지, 현실적인 범위를 모르겠어요"' },
             ].map((item, i) => (
               <div key={i} className={`${item.bg} border ${item.border} rounded-2xl p-6 space-y-4`}>
                 <div className="text-3xl">{item.emoji}</div>
@@ -225,8 +240,87 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 3. Solution ── */}
+      {/* ── 3. 이런 분께 딱입니다 ── */}
       <section className="py-20 sm:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-14">
+            <SectionLabel>For You</SectionLabel>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">이런 분께 딱 맞는 서비스입니다</h2>
+            <p className="text-slate-500 text-base max-w-xl mx-auto">
+              부동산이 어렵고 시간이 없는 분들을 위해 만들었습니다
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                emoji: "⏱️",
+                title: "발품 뛸 시간이 없는 직장인",
+                desc: "퇴근 후에도, 주말에도 시간을 내기 어려운 분. 직접 발품 대신 선별된 매물 정보와 분석 자료로 시간을 아끼세요.",
+                tag: "시간 절약",
+                tagColor: "bg-blue-100 text-blue-700",
+              },
+              {
+                emoji: "📊",
+                title: "정보가 많아도 비교가 어려운 분",
+                desc: "네이버·직방에서 수십 개 매물을 봐도 뭐가 좋은지 모르겠는 분. 조건에 맞는 것만 골라서 이해하기 쉽게 정리해 드립니다.",
+                tag: "정보 정리",
+                tagColor: "bg-indigo-100 text-indigo-700",
+              },
+              {
+                emoji: "🏠",
+                title: "첫 내집 마련을 준비 중인 분",
+                desc: "부동산이 처음이라 어디서 시작해야 할지 모르는 분. 예산 설정부터 매물 선택까지 단계별로 함께 진행합니다.",
+                tag: "첫 구매",
+                tagColor: "bg-green-100 text-green-700",
+              },
+              {
+                emoji: "🚶",
+                title: "현장 방문이 혼자서는 부담스러운 분",
+                desc: "분양 현장이나 공인중개사 사무소에 혼자 가기 어려운 분. 현장·모델하우스에 동행하여 확인 포인트를 함께 점검합니다.",
+                tag: "현장 동행",
+                tagColor: "bg-amber-100 text-amber-700",
+              },
+              {
+                emoji: "🤝",
+                title: "한쪽 입장이 아닌 객관적인 시각이 필요한 분",
+                desc: "분양사 상담은 판매자 입장, 인터넷 정보는 너무 제각각. 고객 조건 기준으로 장단점을 솔직하게 정리해 드립니다.",
+                tag: "객관적 분석",
+                tagColor: "bg-rose-100 text-rose-700",
+              },
+              {
+                emoji: "💡",
+                title: "내 자금으로 뭘 살 수 있는지 모르는 분",
+                desc: "보유 현금·대출 가능 금액·월 상환 여력을 종합해서 실제로 가능한 매물 범위를 먼저 정리해 드립니다.",
+                tag: "예산 분석",
+                tagColor: "bg-teal-100 text-teal-700",
+              },
+            ].map((item, i) => (
+              <div key={i} className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-3 hover:shadow-md hover:border-blue-200 transition-all duration-200">
+                <div className="flex items-start justify-between">
+                  <span className="text-3xl">{item.emoji}</span>
+                  <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${item.tagColor}`}>{item.tag}</span>
+                </div>
+                <h3 className="font-bold text-slate-900 text-base leading-snug">{item.title}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <a
+              href={FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-8 py-4 rounded-full font-bold text-base transition-colors shadow-lg shadow-blue-200"
+            >
+              나도 해당된다면, 신청서 작성하기
+              <IconArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Solution ── */}
+      <section className="py-20 sm:py-24 bg-slate-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <SectionLabel>Solution</SectionLabel>
@@ -260,8 +354,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 4. Service Features ── */}
-      <section id="features" className="py-20 sm:py-24 bg-slate-50">
+      {/* ── 5. Service Features ── */}
+      <section id="features" className="py-20 sm:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
             <SectionLabel>Services</SectionLabel>
@@ -293,8 +387,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 5. Report Preview ── */}
-      <section className="py-20 sm:py-24 bg-white">
+      {/* ── 6. Report Preview ── */}
+      <section className="py-20 sm:py-24 bg-slate-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
             <div className="space-y-6">
@@ -378,7 +472,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 6. Process ── */}
+      {/* ── 7. Process ── */}
       <section className="py-20 sm:py-24 bg-blue-950 text-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
@@ -410,7 +504,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 7. Trust ── */}
+      {/* ── 8. Trust ── */}
       <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
@@ -473,7 +567,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 8. FAQ ── */}
+      {/* ── 9. FAQ ── */}
       <section className="py-20 sm:py-24 bg-slate-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
@@ -482,7 +576,7 @@ export default function Home() {
           </div>
           <div className="space-y-3">
             {[
-              { q: "비용은 얼마인가요?", a: `현재 ${PRICE_TEXT} 단계입니다. ${PRICE_DETAIL}. 오픈 후 정확한 안내를 드릴 예정이며, 먼저 무료 상담을 통해 서비스 범위와 비용을 확인하실 수 있습니다.` },
+              { q: "비용은 얼마인가요?", a: `서비스 이용 요금은 ${PRICE_TEXT}입니다. 단, 서비스 이용 후 솔직한 리뷰를 작성해 주시면 무료로 진행해 드립니다. 초기 오픈 혜택으로 한시적으로 운영 중이니 먼저 신청해 보세요.` },
               { q: "추천받으면 꼭 계약해야 하나요?", a: "아닙니다. 최종 계약 여부는 전적으로 고객님의 결정입니다. 저희는 의사결정을 돕는 분석 자료와 상담을 제공하며, 계약을 강요하거나 대행하지 않습니다." },
               { q: "리포트는 법적 감정평가서인가요?", a: "아닙니다. 분양상담 실무 경험과 감정평가 관점의 분석을 반영한 의사결정 참고용 분석 자료입니다. 법적 효력이 있는 감정평가서가 아니며, 투자 수익을 보장하는 자료도 아닙니다." },
               { q: "현장 동행 서비스도 가능한가요?", a: "네, 가능합니다. 혼자 현장이나 모델하우스를 방문하기 부담스러우신 경우 동행하여 확인 포인트를 함께 점검해 드립니다. 동행 가능 여부 및 일정은 상담을 통해 조율합니다." },
@@ -495,7 +589,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 9. CTA ── */}
+      {/* ── 10. CTA ── */}
       <section id="contact" className="py-24 sm:py-32 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-950 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.4) 0%, transparent 60%)" }} />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-7">
@@ -504,24 +598,46 @@ export default function Home() {
             내 조건에 맞는 매물,<br />대신 찾아드리겠습니다
           </h2>
           <p className="text-blue-200 text-base max-w-md mx-auto leading-relaxed">
-            무료 상담을 통해 어떤 도움이 가능한지 먼저 확인해 보세요.
+            신청서를 작성하거나 카카오 오픈채팅으로 간단히 문의해 보세요.
           </p>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
             <a
-              href={`tel:${CONTACT_PHONE}`}
+              href={FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-700 hover:bg-blue-50 px-8 py-4 rounded-full font-bold text-base transition-colors shadow-xl shadow-blue-900/40"
             >
-              📞 무료 상담 신청하기
+              📋 신청서 작성하기
             </a>
             <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="inline-flex items-center justify-center gap-2 bg-blue-600/60 hover:bg-blue-500/70 text-white border border-blue-400/40 px-8 py-4 rounded-full font-bold text-base transition-colors"
+              href={KAKAO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-slate-900 px-8 py-4 rounded-full font-bold text-base transition-colors shadow-lg"
             >
-              ✉️ 이메일 문의하기
+              💬 카카오 오픈채팅 문의
             </a>
           </div>
+
+          {/* QR 코드 */}
+          <div className="pt-4 flex flex-col items-center gap-3">
+            <p className="text-blue-300 text-xs">카카오 오픈채팅 QR코드로 바로 입장</p>
+            <div className="bg-white p-3 rounded-2xl shadow-xl inline-block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={KAKAO_QR_URL}
+                alt="카카오 오픈채팅 QR코드"
+                width={120}
+                height={120}
+                className="rounded-lg"
+              />
+            </div>
+            <p className="text-blue-400 text-xs">QR 스캔 또는 위 버튼 클릭</p>
+          </div>
+
           <p className="text-blue-300 text-sm pt-2">
-            현재 서비스 이용 요금: <strong className="text-white">{PRICE_TEXT}</strong> — {PRICE_DETAIL}
+            서비스 이용 요금: <strong className="text-white">{PRICE_TEXT}</strong> — {PRICE_DETAIL}
           </p>
         </div>
       </section>
